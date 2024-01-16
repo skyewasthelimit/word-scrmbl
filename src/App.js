@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const alphabet = [
   "B", "C", "D",
@@ -8,6 +9,7 @@ const alphabet = [
   "Z"];
 
 const vowel = ["A", "E", "I", "O", "U", "Y"]
+
 
 function App() {
 
@@ -18,36 +20,51 @@ function App() {
   const [letter4, setLetterM] = useState('M');
   const [letter5, setLetterB] = useState('B');
   const [letter6, setLetterL] = useState('L');
+  const [word, setWord] = useState('')
+
+  const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+
+  const checkWord = (event) => {
+    if (event.key === 'Enter') {
+      axios.get(url).then((response) => {
+        scorePoints(response.data)
+      })
+    }
+  };
+
+const scorePoints = () => {
+
+};
 
   const handleScramble1 = () => {
     const letter1 = alphabet[Math.floor(Math.random() * alphabet.length)]
     setLetterS(letter1);
-  }
+  };
 
   const handleScramble2 = () => {
     const letter2 = vowel[Math.floor(Math.random() * vowel.length)]
     setLetterC(letter2);
-  }
+  };
 
   const handleScramble3 = () => {
     const letter3 = alphabet[Math.floor(Math.random() * alphabet.length)]
     setLetterR(letter3);
-  }
+  };
 
   const handleScramble4 = () => {
     const letter4 = alphabet[Math.floor(Math.random() * alphabet.length)]
     setLetterM(letter4);
-  }
+  };
 
   const handleScramble5 = () => {
     const letter5 = vowel[Math.floor(Math.random() * vowel.length)]
     setLetterB(letter5);
-  }
+  };
 
   const handleScramble6 = () => {
     const letter6 = alphabet[Math.floor(Math.random() * alphabet.length)]
     setLetterL(letter6);
-  }
+  };
 
   const darkmode = () => {
     handleScramble1();
@@ -56,7 +73,7 @@ function App() {
     handleScramble4();
     handleScramble5();
     handleScramble6();
-  }
+  };
 
 
   const increment = () => {
